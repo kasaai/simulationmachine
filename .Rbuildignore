@@ -1,0 +1,4 @@
+^data-raw$
+^internal$
+^.*\.Rproj$
+^\.Rproj\.user$
