@@ -28,10 +28,10 @@ Simulation.Machine <- function(features, npb = nrow(features), seed1 = 100, std1
   neural.network.1 <- function(var1, input, m) {
     
     ### We use the list of variables to get the numbers of hidden neurons as well as the features involved
-    q1 <- list.of.variables[which(list.of.variables$Variable == var1), 2]
-    q2 <- list.of.variables[which(list.of.variables$Variable == var1), 3]
-    d1 <- sum(list.of.variables[which(list.of.variables$Variable == var1), 4:ncol(list.of.variables)])
-    d2 <- list.of.variables[which(list.of.variables$Variable == var1), 4:ncol(list.of.variables)]
+    q1 <- .list_of_variables[which(.list_of_variables$Variable == var1), 2]
+    q2 <- .list_of_variables[which(.list_of_variables$Variable == var1), 3]
+    d1 <- sum(.list_of_variables[which(.list_of_variables$Variable == var1), 4:ncol(.list_of_variables)])
+    d2 <- .list_of_variables[which(.list_of_variables$Variable == var1), 4:ncol(.list_of_variables)]
     
     ### Create a new dataset which will be the input of the neural network
     ### The first column will be the intercept term
@@ -67,10 +67,10 @@ Simulation.Machine <- function(features, npb = nrow(features), seed1 = 100, std1
   neural.network.2 <- function(var1, input, m) {
     
     ### We use the list of variables to get the numbers of hidden neurons as well as the features
-    q1 <- list.of.variables[which(list.of.variables$Variable == var1), 2]
-    q2 <- list.of.variables[which(list.of.variables$Variable == var1), 3]
-    d1 <- sum(list.of.variables[which(list.of.variables$Variable == var1), 4:ncol(list.of.variables)])
-    d2 <- list.of.variables[which(list.of.variables$Variable == var1), 4:ncol(list.of.variables)]
+    q1 <- .list_of_variables[which(.list_of_variables$Variable == var1), 2]
+    q2 <- .list_of_variables[which(.list_of_variables$Variable == var1), 3]
+    d1 <- sum(.list_of_variables[which(.list_of_variables$Variable == var1), 4:ncol(.list_of_variables)])
+    d2 <- .list_of_variables[which(.list_of_variables$Variable == var1), 4:ncol(.list_of_variables)]
     
     ### Create a new dataset which will be the input of the neural network
     ### The first column will be the intercept term
@@ -103,9 +103,9 @@ Simulation.Machine <- function(features, npb = nrow(features), seed1 = 100, std1
   neural.network.3 <- function(var1, input, m) {
     
     ### We use the list of variables to get the number of hidden neurons as well as the features
-    q <- list.of.variables[which(list.of.variables$Variable == var1), 2]
-    d1 <- sum(list.of.variables[which(list.of.variables$Variable == var1), 4:ncol(list.of.variables)])
-    d2 <- list.of.variables[which(list.of.variables$Variable == var1), 4:ncol(list.of.variables)]
+    q <- .list_of_variables[which(.list_of_variables$Variable == var1), 2]
+    d1 <- sum(.list_of_variables[which(.list_of_variables$Variable == var1), 4:ncol(.list_of_variables)])
+    d2 <- .list_of_variables[which(.list_of_variables$Variable == var1), 4:ncol(.list_of_variables)]
     
     ### Create a new dataset which will be the input of the neural network
     ### The first column will be the intercept term
