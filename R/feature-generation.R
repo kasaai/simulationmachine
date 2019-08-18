@@ -8,7 +8,7 @@ Feature.Generation <- function(V = 1000000, LoB.dist = c(0.25, 0.30, 0.20, 0.25)
                                inflation = c(0.01, 0.01, 0.01, 0.01), seed = 100) {
   
   ### Weights in LoB.dist have to be nonnegative
-  if (any(LoB.dist) < 0)
+  if (any((LoB.dist) < 0))
     stop("The weights determining the distribution amongst the lines of business cannot be negative.", 
          call. = FALSE)
   
