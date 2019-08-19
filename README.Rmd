@@ -1,0 +1,54 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+# simulationmachine
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+This package implements the claims history simulation algorithm detailed in [*An Individual Claims History Simulation Machine*](https://www.mdpi.com/2227-9091/6/2/29) by Andrea Gabrielli and Mario V. Wüthrich. The goal is to provide an easy-to-use interface for generating claims data that can be used for loss reserving research.
+
+## Installation
+
+You can install the development version from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("kasaai/conjuror")
+devtools::install_github("kasaai/simulationmachine")
+```
+## Example
+
+First, we can specify the parameters of a simulation using `simulation_machine()`:
+
+```{r}
+library(simulationmachine)
+
+incantation <- simulation_machine(
+  num_records = 500000, 
+  lob_distribution = c(0.25, 0.25, 0.25, 0.25), 
+  inflation = c(0.01, 0.01, 0.01, 0.01), 
+  sd_claim = 0.85, 
+  sd_recovery = 0.85
+)
+
+incantation
+```
+
+Once we have the incantation object, we can use `conjure()` to perform the simulation.
+
+```{r}
+records <- conjure(incantation, seed = 100)
+dplyr::glimpse(records)
+```
