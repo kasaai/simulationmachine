@@ -54,3 +54,23 @@ conjure.simulation_machine <- function(incantation, seed = NULL,
   
   records
 }
+
+#' @export
+print.simulation_machine <- function(x, ...) {
+  num_records <- incantation[["num_records"]]
+  lob_distribution <- incantation[["lob_distribution"]]
+  inflation <- incantation[["inflation"]]
+  sd_claim <- incantation[["sd_claim"]]
+  sd_recovery <- incantation[["sd_recovery"]]
+  
+  print(glue::glue("
+A simulation incantation for `simulation_machine`
+
+Specs:
+ - Expected number of claims: {format(num_records, big.mark = ',')}
+ - LOB distribution: {paste0(lob_distribution, collapse = ', ')}
+ - Inflation: {paste0(inflation, collapse = ', ')}
+ - SD of claim sizes: {sd_claim},
+ - SD of recovery sizes: {sd_recovery}
+"))
+}
