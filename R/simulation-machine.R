@@ -808,6 +808,7 @@ neural.network.1 <- function(var1, input, m) {
   z2_j <- array(1, c(q2 + 1, m))
   z2_j[-1, ] <- (1 + exp(-W2 %*% (2 * z1_j - 1)))^(-1)
   mu_t <- t(beta) %*% (2 * z2_j - 1)
+  mu_t
 }
 
 # LoB Bernoulli (with values 0,1)
@@ -844,6 +845,7 @@ neural.network.2 <- function(var1, input, m) {
   z2_j[-1, ] <- (1 + exp(-W2 %*% (2 * z1_j - 1)))^(-1)
   mu_t <- exp(t(beta) %*% (2 * z2_j - 1))
   pi_t <- mu_t / colSums(mu_t)[col(mu_t)]
+  pi_t
 }
 
 # Neural network with one hidden layer (for closing date)
@@ -876,6 +878,7 @@ neural.network.3 <- function(var1, input, m) {
   z_j <- array(1, c(q + 1, m))
   z_j[-1, ] <- (1 + exp(-W %*% t(data.2)))^(-1)
   pi0 <- (1 + exp(-t(beta) %*% (2 * z_j - 1)))^(-1)
+  pi0
 }
 
 # Define the two different cash flow preparation functions
@@ -1090,4 +1093,5 @@ cash.flow.2 <- function(np, input, art.obs1, art.obs2, seed1) {
   
   # All observations with exactly np payments together with the cash flows
   x.np <- cash.flow.1(np, x.np, art.obs2, seed1 = seed1)
+  x.np
 }
