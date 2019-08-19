@@ -2,5 +2,6 @@
 
 S3method(conjure,simulation_machine)
 S3method(print,simulation_machine)
+export(conjure)
 export(simulation_machine)
 importFrom(conjuror,conjure)

@@ -24,9 +24,12 @@ simulation_machine <- function(num_records,
   )
 }
 
+#' @importFrom conjuror conjure
+#' @export
+conjuror::conjure
+
 #' Simulate Claim Histories
 #' 
-#' @importFrom conjuror conjure
 #' @param seed Seed for random number generation.
 #' @param rows_per_partition (Optional) For parallel processing, number of 
 #'   observations that are treated at the same time.
