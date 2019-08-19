@@ -4,7 +4,7 @@
 #' @param npb Number of observations that are treated at the same time (number per block).
 #' @param seed1 Seed for reproducibility.
 #' @param std1 Value of the standard deviation used in the log-normal distribution of the claim sizes.
-#' @param std1 Value of the standard deviation used in the log-normal distribution of the recovery sizes.
+#' @param std2 Value of the standard deviation used in the log-normal distribution of the recovery sizes.
 Simulation.Machine <- function(features, npb = nrow(features), seed1 = 100, std1 = 0.85, std2 = 0.85) {
   
   # Features have to have the right format

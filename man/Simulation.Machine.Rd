@@ -16,7 +16,7 @@ Simulation.Machine(features, npb = nrow(features), seed1 = 100,
 
 \item{std1}{Value of the standard deviation used in the log-normal distribution of the claim sizes.}
 
-\item{std1}{Value of the standard deviation used in the log-normal distribution of the recovery sizes.}
+\item{std2}{Value of the standard deviation used in the log-normal distribution of the recovery sizes.}
 }
 \description{
 Simulate Claims
