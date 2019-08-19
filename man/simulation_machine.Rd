@@ -4,7 +4,8 @@
 \alias{simulation_machine}
 \title{Create a Simulation Machine Specification}
 \usage{
-simulation_machine(num_records, lob_distribution, inflation)
+simulation_machine(num_records, lob_distribution, inflation, sd_claim,
+  sd_recovery)
 }
 \arguments{
 \item{num_records}{Number of expected records to generate.}
@@ -14,6 +15,12 @@ four LOBs.}
 
 \item{inflation}{A length 4 vector. Grow parameters (per LOB) for the numbers
 of claims in the 12 accident years.}
+
+\item{sd_claim}{Value of the standard deviation used in the log-normal 
+distribution of the claim sizes.}
+
+\item{sd_recovery}{Value of the standard deviation used in the log-normal 
+distribution of the recovery sizes.}
 }
 \value{
 An incantation object.

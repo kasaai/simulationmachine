@@ -4,16 +4,10 @@
 \alias{conjure.simulation_machine}
 \title{Simulate Claim Histories}
 \usage{
-\method{conjure}{simulation_machine}(incantation, sd_claim, sd_recovery,
-  seed = NULL, rows_per_partition = NULL, ...)
+\method{conjure}{simulation_machine}(incantation, seed = NULL,
+  rows_per_partition = NULL, ...)
 }
 \arguments{
-\item{sd_claim}{Value of the standard deviation used in the log-normal 
-distribution of the claim sizes.}
-
-\item{sd_recovery}{Value of the standard deviation used in the log-normal 
-distribution of the recovery sizes.}
-
 \item{seed}{Seed for random number generation.}
 
 \item{rows_per_partition}{(Optional) For parallel processing, number of 

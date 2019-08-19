@@ -5,32 +5,34 @@
 #'   four LOBs.
 #' @param inflation A length 4 vector. Grow parameters (per LOB) for the numbers
 #'    of claims in the 12 accident years.
+#' @param sd_claim Value of the standard deviation used in the log-normal 
+#'   distribution of the claim sizes.
+#' @param sd_recovery  Value of the standard deviation used in the log-normal 
+#'   distribution of the recovery sizes.
 #' @return An incantation object.
 #' @export
 simulation_machine <- function(num_records,
                                lob_distribution,
-                               inflation) {
+                               inflation, sd_claim, sd_recovery) {
   conjuror::scribe(
     simulator = "simulation_machine",
     num_records = num_records,
     lob_distribution = lob_distribution,
-    inflation = inflation
+    inflation = inflation,
+    sd_claim = sd_claim,
+    sd_recovery = sd_recovery
   )
 }
 
 #' Simulate Claim Histories
 #' 
 #' @importFrom conjuror conjure
-#' @param sd_claim Value of the standard deviation used in the log-normal 
-#'   distribution of the claim sizes.
-#' @param sd_recovery  Value of the standard deviation used in the log-normal 
-#'   distribution of the recovery sizes.
 #' @param seed Seed for random number generation.
 #' @param rows_per_partition (Optional) For parallel processing, number of 
 #'   observations that are treated at the same time.
 #' @export
-conjure.simulation_machine <- function(incantation, sd_claim, sd_recovery,
-                                       seed = NULL, rows_per_partition = NULL, ...) {
+conjure.simulation_machine <- function(incantation, seed = NULL, 
+                                       rows_per_partition = NULL, ...) {
   features <- Feature.Generation(
     V = incantation[["num_records"]],
     LoB.dist = incantation[["lob_distribution"]],
@@ -46,8 +48,8 @@ conjure.simulation_machine <- function(incantation, sd_claim, sd_recovery,
     features,
     npb = rows_per_partition,
     seed1 = seed,
-    std1 = sd_claim,
-    std2 = sd_recovery
+    std1 = incantation[["sd_claim"]],
+    std2 = incantation[["sd_recovery"]]
   )
   
   records
