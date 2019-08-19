@@ -1,14 +1,26 @@
 Package: simulationmachine
-Title: What the Package Does (One Line, Title Case)
+Title: Individual Claims History Simulation Machine 
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    c(
+      person(given = "Andrea",
+           family = "Gabrielli",
+           role = "aut",
+           email = "andrea.gabrielli@math.ethz.ch"),
+      person(given = "Mario",
+           family = "Wüthrich",
+           role = "aut",
+           email = "mario.wuethrich@math.ethz.ch"),
+      person(given = "Kevin",
+           family = "Kuo",
            role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: What license it uses
+           email = "kevin@kasa.ai",
+           comment = c(ORCID = "0000-0001-7803-7901"))
+    )
+Description: This package provides a 'conjuror' interface for simulating
+  insurance claims histories. The algorithm is described in Gabrielli and 
+  Wüthrich (2018) <doi:10.3390/risks6020029>.
+License: Apache License (>= 2.0)
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
@@ -19,5 +31,5 @@ Imports:
     MASS,
     foreach,
     doParallel
-Remotes:  
+Remotes: 
     kasaai/conjuror
