@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![Travis build status](https://travis-ci.org/kasaai/simulationmachine.svg?branch=master)](https://travis-ci.org/kasaai/simulationmachine)
 <!-- badges: end -->
 
 **NOTE: In early stages of development -- do not use yet!**
