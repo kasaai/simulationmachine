@@ -15,7 +15,10 @@ knitr::opts_chunk$set(
 # simulationmachine
 
 <!-- badges: start -->
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
+
+**NOTE: In early stages of development -- do not use yet!**
 
 This package implements the claims history simulation algorithm detailed in [*An Individual Claims History Simulation Machine*](https://www.mdpi.com/2227-9091/6/2/29) by Andrea Gabrielli and Mario V. Wüthrich. The goal is to provide an easy-to-use interface for generating claims data that can be used for loss reserving research.
 

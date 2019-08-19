@@ -5,7 +5,11 @@
 
 <!-- badges: start -->
 
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
+
+**NOTE: In early stages of development – do not use yet\!**
 
 This package implements the claims history simulation algorithm detailed
 in [*An Individual Claims History Simulation
