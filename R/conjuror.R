@@ -30,6 +30,8 @@ conjuror::conjure
 
 #' Simulate Claim Histories
 #' 
+#' @param incantation An `incantation` object returned by `simulation_machine()`.
+#' @param ... Optional additional arguments, currently unused.
 #' @param seed Seed for random number generation.
 #' @param rows_per_partition (Optional) For parallel processing, number of 
 #'   observations that are treated at the same time.
@@ -60,11 +62,11 @@ conjure.simulation_machine <- function(incantation, seed = NULL,
 
 #' @export
 print.simulation_machine <- function(x, ...) {
-  num_records <- incantation[["num_records"]]
-  lob_distribution <- incantation[["lob_distribution"]]
-  inflation <- incantation[["inflation"]]
-  sd_claim <- incantation[["sd_claim"]]
-  sd_recovery <- incantation[["sd_recovery"]]
+  num_records <- x[["num_records"]]
+  lob_distribution <- x[["lob_distribution"]]
+  inflation <- x[["inflation"]]
+  sd_claim <- x[["sd_claim"]]
+  sd_recovery <- x[["sd_recovery"]]
   
   print(glue::glue("
 A simulation incantation for `simulation_machine`

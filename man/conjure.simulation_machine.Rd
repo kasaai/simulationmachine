@@ -8,10 +8,14 @@
   rows_per_partition = NULL, ...)
 }
 \arguments{
+\item{incantation}{An `incantation` object returned by `simulation_machine()`.}
+
 \item{seed}{Seed for random number generation.}
 
 \item{rows_per_partition}{(Optional) For parallel processing, number of 
 observations that are treated at the same time.}
+
+\item{...}{Optional additional arguments, currently unused.}
 }
 \description{
 Simulate Claim Histories

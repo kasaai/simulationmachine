@@ -17,18 +17,18 @@ Feature.Generation <- function(V = 1000000, LoB.dist = c(0.25, 0.30, 0.20, 0.25)
   
   # Determine the number of claims per line of business
   maybe_set_seed(seed)
-  V.dist[1, ] <- rmultinom(n = 1, size = V, prob = LoB.dist)
+  V.dist[1, ] <- stats::rmultinom(n = 1, size = V, prob = LoB.dist)
   
   # Determine the number of claims per accident year (for all lines of business)
   V.dist[2, ] <- 0
   maybe_set_seed(seed + 1)
-  V.dist[-c(1, 2), ] <- rnorm(44, mean = rep(inflation, each = 11), sd = rep(abs(inflation), each = 11))
+  V.dist[-c(1, 2), ] <- stats::rnorm(44, mean = rep(inflation, each = 11), sd = rep(abs(inflation), each = 11))
   V.dist[-c(1, 2), ] <- apply(V.dist[-c(1, 2), ], 2, cumsum)
   V.dist[-1, ] <- exp(V.dist[-1, ])
   V.dist[-1, ] <- t(t(V.dist[-1, ]) / colSums(V.dist[-1, ]))
   V.dist[-1, ] <- t(t(V.dist[-1, ]) * V.dist[1, ])
   maybe_set_seed(seed + 2)
-  V.dist[-1, ] <- rpois(n = 48, lambda = V.dist[-1, ])
+  V.dist[-1, ] <- stats::rpois(n = 48, lambda = V.dist[-1, ])
   V.dist[1, ] <- colSums(V.dist[-1, ])
   
   # Create the array where we will store the observations
@@ -119,10 +119,10 @@ generate_features_lob <- function(features,
   
   # Generate observations from a multivariate normal distribution
   # maybe_set_seed(seed + 3)
-  features_new <- mvrnorm(n = nrow(features[which(features$LoB <= 2), ]), mu = rep(0, 4), Sigma = Sigma)
+  features_new <- MASS::mvrnorm(n = nrow(features[which(features$LoB <= 2), ]), mu = rep(0, 4), Sigma = Sigma)
   
   # Transform marginals such that they have a uniform distribution on [0,1]
-  features_new <- pnorm(features_new, 0, 1)
+  features_new <- stats::pnorm(features_new, 0, 1)
   
   # Transform marginals such that they have the appropriate distribution
   # Claim code
