@@ -161,7 +161,7 @@ Simulation.Machine <- function(features, npb = nrow(features), seed1 = 100, std1
     pi_t.tilde <- matrix(cbind(pi_t[, which(1 - is.na(pi_t)[1, ] == 1)], pi_t[, ncol(pi_t)]), nrow = length(distribution.codes))
     
     ### Generate the distribution pattern according to pi_t.tilde
-    set.seed(seed1 + 20 + np)
+    maybe_set_seed(seed1 + 20 + np)
     random.generation <- stats::runif(ncol(pi_t.tilde))
     cumul.pi_t <- lower.tri(diag(nrow(pi_t.tilde)), diag = TRUE) %*% pi_t.tilde / colSums(pi_t.tilde)
     distribution.pattern <- distribution.codes[rowSums(random.generation > t(cumul.pi_t)) + 1]
@@ -177,9 +177,9 @@ Simulation.Machine <- function(features, npb = nrow(features), seed1 = 100, std1
     art.obs.new$RepDel <- 1
     x.np <- rbind(x.np, art.obs.new)
     pi_t <- cbind(pi_t, NA) ### need this below
-    set.seed(seed1 + 100 + np)
+    maybe_set_seed(seed1 + 100 + np)
     choose <- sample(1:nrow(x.np[which(x.np$RepDel == 1), ]), ceiling(nrow(x.np[which(x.np$RepDel == 1), ]) / 2))
-    set.seed(seed1 + 120 + np)
+    maybe_set_seed(seed1 + 120 + np)
     samp <- replicate(length(choose), sample(2:12, np))
     x.np[which(x.np$RepDel == 1)[choose], ncol(x.np[which(x.np$RepDel == 1), ])] <- colSums(2^(samp))
     
@@ -187,7 +187,7 @@ Simulation.Machine <- function(features, npb = nrow(features), seed1 = 100, std1
     ### Now we take the observations where we have no distribution pattern that is possible (because of the reporting delay)
     n1 <- sum(is.na(pi_t)[1, ])
     samp <- matrix(NA, ncol = np, nrow = n1)
-    set.seed(seed1 + 140 + np)
+    maybe_set_seed(seed1 + 140 + np)
     dist <- function(x) {
       sample((x + 1):12, size = np)
     }
@@ -274,7 +274,7 @@ Simulation.Machine <- function(features, npb = nrow(features), seed1 = 100, std1
     
     ### Determine the positions of the positive payments and of the negative payments
     ### First simulate from a uniform distribution and cumulatively add np to the positions, starting with 0
-    set.seed(seed1 + 60 + np)
+    maybe_set_seed(seed1 + 60 + np)
     random.generation <- sample(2:(np - 1), nrow(data3), replace = TRUE) + seq(from = 0, to = np * (nrow(data3) - 1), by = np)
     positions.tilde <- t(positions)
     positions.tilde[which(positions.tilde > 0)][random.generation] <- -1
@@ -387,7 +387,7 @@ Simulation.Machine <- function(features, npb = nrow(features), seed1 = 100, std1
       pi_t <- exp(pi_t) / colSums(exp(pi_t))[col(exp(pi_t))]
       
       ### Generate the reporting delay according to pi_t and add it
-      set.seed(seed1 + 1)
+      maybe_set_seed(seed1 + 1)
       random.generation <- stats::runif(ncol(pi_t))
       cumul.pi_t <- lower.tri(diag(nrow(pi_t)), diag = TRUE) %*% pi_t / colSums(pi_t)
       x[, 8] <- (0:11)[rowSums(random.generation > t(cumul.pi_t)) + 1]
@@ -403,7 +403,7 @@ Simulation.Machine <- function(features, npb = nrow(features), seed1 = 100, std1
       pi_t <- (1 + exp(-pi_t))^(-1)
       
       ### Generate the payment indicator according to pi_t and add it
-      set.seed(seed1 + 2)
+      maybe_set_seed(seed1 + 2)
       random.generation <- stats::runif(ncol(pi_t))
       x[, 9] <- colSums(random.generation <= pi_t)
       
@@ -426,7 +426,7 @@ Simulation.Machine <- function(features, npb = nrow(features), seed1 = 100, std1
       pi_t <- (1 + exp(-pi_t))^(-1)
       
       ### Generate the number of payments indicator according to pi_t and add it
-      set.seed(seed1 + 3)
+      maybe_set_seed(seed1 + 3)
       random.generation <- stats::runif(ncol(pi_t))
       x1[, 11] <- colSums(random.generation <= pi_t)
       
@@ -458,7 +458,7 @@ Simulation.Machine <- function(features, npb = nrow(features), seed1 = 100, std1
       pi_t <- t(t(pi_t - t(matrix(rep(10:0, each = nrow(x2)), nrow = nrow(x2)) < x2[, 8]) * pi_t) / colSums(pi_t - t(matrix(rep(10:0, each = nrow(x2)), nrow = nrow(x2)) < x2[, 8]) * pi_t))
       
       ### Generate the number of payments according to pi_t and add it
-      set.seed(seed1 + 4)
+      maybe_set_seed(seed1 + 4)
       random.generation <- stats::runif(ncol(pi_t))
       cumul.pi_t <- lower.tri(diag(nrow(pi_t)), diag = TRUE) %*% pi_t / colSums(pi_t)
       x2[, 12] <- (2:12)[rowSums(random.generation > t(cumul.pi_t)) + 1]
@@ -473,14 +473,14 @@ Simulation.Machine <- function(features, npb = nrow(features), seed1 = 100, std1
       mu_t <- neural.network.1("logY", x.1.0, nrow(x.1.0))
       
       ### Generate the payment size according to mu_t and add it (for x.1.0)
-      set.seed(seed1 + 15)
+      maybe_set_seed(seed1 + 15)
       x.1.0[, 10] <- stats::rnorm(nrow(x.1.0), mean = mu_t, sd = std1)
       
       ### Get the output of the neural network (for x2)
       mu_t <- neural.network.1("logY", x2, nrow(x2))
       
       ### Generate the payment size according to mu_t and add it (for x2)
-      set.seed(seed1 + 5)
+      maybe_set_seed(seed1 + 5)
       x2[, 10] <- stats::rnorm(nrow(x2), mean = mu_t, sd = std1)
       
       ### Correct for the observation that we added artificially
@@ -504,7 +504,7 @@ Simulation.Machine <- function(features, npb = nrow(features), seed1 = 100, std1
       pi_t <- matrix(pi_t[1, ] / colSums(matrix(pi_t[-3, ], ncol = nrow(rbind(x2[which(x2$K == 2), ], x.art)))), ncol = nrow(rbind(x2[which(x2$K == 2), ], x.art)))
       
       ### Generate the recovery indicator according to pi_t and add it
-      set.seed(seed1 + 6)
+      maybe_set_seed(seed1 + 6)
       random.generation <- stats::runif(ncol(pi_t))
       x2[which(x2$K == 2), 13] <- colSums(random.generation > pi_t)[-length(colSums(random.generation > pi_t))]
       
@@ -514,7 +514,7 @@ Simulation.Machine <- function(features, npb = nrow(features), seed1 = 100, std1
       pi_t <- exp(pi_t) / colSums(exp(pi_t))[col(exp(pi_t))]
       
       ### Generate the recovery indicator according to pi_t and add it
-      set.seed(seed1 + 7)
+      maybe_set_seed(seed1 + 7)
       random.generation <- stats::runif(ncol(pi_t))
       cumul.pi_t <- lower.tri(diag(nrow(pi_t)), diag = TRUE) %*% pi_t / colSums(pi_t)
       x2[which(x2$K > 2), 13] <- (0:2)[rowSums(random.generation > t(cumul.pi_t)) + 1][-length((0:2)[rowSums(random.generation > t(cumul.pi_t)) + 1])]
@@ -530,7 +530,7 @@ Simulation.Machine <- function(features, npb = nrow(features), seed1 = 100, std1
       mu_t <- neural.network.1("logYm", x2[which(x2$Zmnew > 0), ], nrow(x2[which(x2$Zmnew > 0), ]))
       
       ### Generate the recovery payment size according to mu_t and add it
-      set.seed(seed1 + 8)
+      maybe_set_seed(seed1 + 8)
       x2[which(x2$Zmnew > 0), 14] <- stats::rnorm(nrow(x2[which(x2$Zmnew > 0), ]), mean = mu_t, sd = std2)
       x2 <- rbind(x.art, x2)
       x2[1, 13] <- 0
@@ -572,7 +572,7 @@ Simulation.Machine <- function(features, npb = nrow(features), seed1 = 100, std1
       pi_t <- (1 + exp(-pi_t))^(-1)
       
       ### Generate the payment delay indicator according to pi_t and add it
-      set.seed(seed1 + 9)
+      maybe_set_seed(seed1 + 9)
       random.generation <- stats::runif(ncol(pi_t))
       x.1.0[, 27] <- colSums(random.generation <= pi_t)
       
@@ -612,7 +612,7 @@ Simulation.Machine <- function(features, npb = nrow(features), seed1 = 100, std1
       pi_t <- t(t(pi_t - t(matrix(rep(10:0, each = nrow(x.1.0.0)), nrow = nrow(x.1.0.0)) < x.1.0.0[, 8]) * pi_t) / colSums(pi_t - t(matrix(rep(10:0, each = nrow(x.1.0.0)), nrow = nrow(x.1.0.0)) < x.1.0.0[, 8]) * pi_t))
       
       ### Generate the number of payments according to pi_t
-      set.seed(seed1 + 10)
+      maybe_set_seed(seed1 + 10)
       random.generation <- stats::runif(ncol(pi_t))
       cumul.pi_t <- lower.tri(diag(nrow(pi_t)), diag = TRUE) %*% pi_t / colSums(pi_t)
       payment.delay <- (1:11)[rowSums(random.generation > t(cumul.pi_t)) + 1]
@@ -660,7 +660,7 @@ Simulation.Machine <- function(features, npb = nrow(features), seed1 = 100, std1
       pi_t <- exp(pi_t) / colSums(exp(pi_t))[col(exp(pi_t))]
       
       ### Generate the distribution pattern according to pi_t and add it
-      set.seed(seed1 + 11)
+      maybe_set_seed(seed1 + 11)
       random.generation <- stats::runif(ncol(pi_t))
       cumul.pi_t <- lower.tri(diag(nrow(pi_t)), diag = TRUE) %*% pi_t / colSums(pi_t)
       x.2.0.0[, 27] <- (1:66)[rowSums(random.generation > t(cumul.pi_t)) + 1]
@@ -677,7 +677,7 @@ Simulation.Machine <- function(features, npb = nrow(features), seed1 = 100, std1
                   colSums(pi_t - t(matrix(rep(1:66, each = nrow(x.2.0.1)), nrow = nrow(x.2.0.1)) < (x.2.0.1[, 8] * (23 - x.2.0.1[, 8]) / 2 + 1)) * pi_t))
       
       ### Generate the distribution pattern according to pi_t and add them
-      set.seed(seed1 + 12)
+      maybe_set_seed(seed1 + 12)
       random.generation <- stats::runif(ncol(pi_t))
       cumul.pi_t <- lower.tri(diag(nrow(pi_t)), diag = TRUE) %*% pi_t / colSums(pi_t)
       x.2.0.1[, 27] <- (1:66)[rowSums(random.generation > t(cumul.pi_t)) + 1]
@@ -737,7 +737,7 @@ Simulation.Machine <- function(features, npb = nrow(features), seed1 = 100, std1
       pi_t <- exp(pi_t) / colSums(exp(pi_t))[col(exp(pi_t))]
       
       ### Generate the distribution pattern according to pi_t and add it
-      set.seed(seed1 + 13)
+      maybe_set_seed(seed1 + 13)
       random.generation <- stats::runif(ncol(pi_t))
       cumul.pi_t <- lower.tri(diag(nrow(pi_t)), diag = TRUE) %*% pi_t / colSums(pi_t)
       x.2.1.0[, 27] <- distribution.codes[rowSums(random.generation > t(cumul.pi_t)) + 1]
@@ -754,7 +754,7 @@ Simulation.Machine <- function(features, npb = nrow(features), seed1 = 100, std1
                   colSums(pi_t - t(matrix(rep(distribution.codes, each = nrow(x.2.1.1)), nrow = nrow(x.2.1.1)) < (x.2.1.1[, 8] * (23 - x.2.1.1[, 8]) / 2 + 1)) * pi_t))
       
       ### Generate the distribution pattern according to pi_t and add it
-      set.seed(seed1 + 14)
+      maybe_set_seed(seed1 + 14)
       random.generation <- stats::runif(ncol(pi_t))
       cumul.pi_t <- lower.tri(diag(nrow(pi_t)), diag = TRUE) %*% pi_t / colSums(pi_t)
       x.2.1.1[, 27] <- distribution.codes[rowSums(random.generation > t(cumul.pi_t)) + 1]
@@ -1012,7 +1012,7 @@ Simulation.Machine <- function(features, npb = nrow(features), seed1 = 100, std1
       
       ### Determine the positions of the positive and the negative payments
       x.12.2[, 15:26] <- 1
-      set.seed(seed1 + 80)
+      maybe_set_seed(seed1 + 80)
       random.generation <- sample(2:11, nrow(x.12.2), replace = TRUE) + seq(from = 0, to = 12 * (nrow(x.12.2) - 1), by = 12)
       positions.tilde <- t(x.12.2[, 15:26])
       positions.tilde[random.generation] <- -1
@@ -1053,7 +1053,7 @@ Simulation.Machine <- function(features, npb = nrow(features), seed1 = 100, std1
     pi_t <- matrix(neural.network.3("ReOp", final.tilde, nrow(final.tilde)), ncol = nrow(final.tilde))
     
     ### Generate the reopening indicator according to pi_t and add it
-    set.seed(seed1 + 40)
+    maybe_set_seed(seed1 + 40)
     random.generation <- stats::runif(ncol(pi_t))
     final$ReOp <- colSums(random.generation <= pi_t)
     
@@ -1096,7 +1096,7 @@ Simulation.Machine <- function(features, npb = nrow(features), seed1 = 100, std1
     pi_t <- t(final.tilde[, 9:21])
     
     ### Generate the (possible) closing year according to pi_t and add it
-    set.seed(seed1 + 41)
+    maybe_set_seed(seed1 + 41)
     random.generation <- stats::runif(ncol(pi_t))
     cumul.pi_t <- lower.tri(diag(nrow(pi_t)), diag = TRUE) %*% pi_t / colSums(pi_t)
     final.tilde$SetDel <- (0:12)[rowSums(random.generation > t(cumul.pi_t)) + 1]
@@ -1126,11 +1126,11 @@ Simulation.Machine <- function(features, npb = nrow(features), seed1 = 100, std1
     final2$uniform <- final2$maxPayDel - final2$RepDel
     
     ### Determine the first settlement
-    set.seed(seed1 + 42)
+    maybe_set_seed(seed1 + 42)
     final2$SetDel <- final2$RepDel + floor(stats::runif(nrow(final2)) * (final2$uniform + 1))
     
     ### Determine the (possible) second settlement
-    set.seed(seed1 + 43)
+    maybe_set_seed(seed1 + 43)
     final2$SetDel2 <- final2$maxPayDel + floor(stats::runif(nrow(final2)) * (12 - final2$maxPayDel)) + 2
     
     ### Determine the settlement pattern and add it
