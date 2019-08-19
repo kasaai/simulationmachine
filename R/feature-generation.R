@@ -16,18 +16,18 @@ Feature.Generation <- function(V = 1000000, LoB.dist = c(0.25, 0.30, 0.20, 0.25)
   V.dist <- array(NA, c(13, 4))
   
   # Determine the number of claims per line of business
-  set.seed(seed)
+  maybe_set_seed(seed)
   V.dist[1, ] <- rmultinom(n = 1, size = V, prob = LoB.dist)
   
   # Determine the number of claims per accident year (for all lines of business)
   V.dist[2, ] <- 0
-  set.seed(seed + 1)
+  maybe_set_seed(seed + 1)
   V.dist[-c(1, 2), ] <- rnorm(44, mean = rep(inflation, each = 11), sd = rep(abs(inflation), each = 11))
   V.dist[-c(1, 2), ] <- apply(V.dist[-c(1, 2), ], 2, cumsum)
   V.dist[-1, ] <- exp(V.dist[-1, ])
   V.dist[-1, ] <- t(t(V.dist[-1, ]) / colSums(V.dist[-1, ]))
   V.dist[-1, ] <- t(t(V.dist[-1, ]) * V.dist[1, ])
-  set.seed(seed + 2)
+  maybe_set_seed(seed + 2)
   V.dist[-1, ] <- rpois(n = 48, lambda = V.dist[-1, ])
   V.dist[1, ] <- colSums(V.dist[-1, ])
   
@@ -84,7 +84,7 @@ Feature.Generation <- function(V = 1000000, LoB.dist = c(0.25, 0.30, 0.20, 0.25)
   features[which(features$LoB <= 2), c(3, 5, 6, 7)] <- features_34
 
   # Order the data: first random order then order according to the accident year AY
-  set.seed(seed + 5)
+  maybe_set_seed(seed + 5)
   order1 <- sample(1:nrow(features), nrow(features))
   features <- features[order1, ]
   order2 <- order(features$AY)
@@ -118,7 +118,7 @@ generate_features_lob <- function(features,
                               seed) {
   
   # Generate observations from a multivariate normal distribution
-  # set.seed(seed + 3)
+  # maybe_set_seed(seed + 3)
   features_new <- mvrnorm(n = nrow(features[which(features$LoB <= 2), ]), mu = rep(0, 4), Sigma = Sigma)
   
   # Transform marginals such that they have a uniform distribution on [0,1]
