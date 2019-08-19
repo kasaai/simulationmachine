@@ -26,6 +26,8 @@ Simulation.Machine <- function(features, npb = nrow(features), seed1 = 100, std1
   features$cc <- as.integer(levels(features$cc))[features$cc]
   features$inj_part <- as.integer(levels(features$inj_part))[features$inj_part]
   
+  # Turn off parallel processing during development
+  
   # # Calculate the number of cores
   # no_cores <- parallel::detectCores() - 1
   # 
