@@ -72,7 +72,7 @@ print.simulation_machine <- function(x, ...) {
 A simulation incantation for `simulation_machine`
 
 Specs:
- - Expected number of claims: {format(num_records, big.mark = ',')}
+ - Expected number of claims: {format(num_records, big.mark = ',', scientific = FALSE)}
  - LOB distribution: {paste0(lob_distribution, collapse = ', ')}
  - Inflation: {paste0(inflation, collapse = ', ')}
  - SD of claim sizes: {sd_claim},
