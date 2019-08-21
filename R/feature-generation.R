@@ -81,7 +81,7 @@ Feature.Generation <- function(V = 1000000, LoB.dist = c(0.25, 0.30, 0.20, 0.25)
     seed = seed + 4
   )
   
-  features[which(features$LoB <= 2), c(3, 5, 6, 7)] <- features_34
+  features[which(features$LoB > 2), c(3, 5, 6, 7)] <- features_34
 
   # Order the data: first random order then order according to the accident year AY
   maybe_set_seed(seed + 5)
