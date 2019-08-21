@@ -67,7 +67,7 @@ Feature.Generation <- function(V = 1000000, LoB.dist = c(0.25, 0.30, 0.20, 0.25)
   
   # Feature generation for LOB 3 and 4
   features_34 <- generate_features_lob(
-    features = features_12,
+    features = features,
     Sigma = .lob_34$Covariances$Covariance,
     param_cc = .lob_34$Parameters$cc,
     translator_cc = .lob_34$Translators$cc,
