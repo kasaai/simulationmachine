@@ -50,6 +50,7 @@ Feature.Generation <- function(V = 1000000, LoB.dist = c(0.25, 0.30, 0.20, 0.25)
   # Feature generation for LOB 1 and 2 
   features_12 <- generate_features_lob(
     features = features,
+    lobs = 1:2,
     Sigma = .lob_12$Covariances$Covariance,
     param_cc = .lob_12$Parameters$cc,
     translator_cc = .lob_12$Translators$cc,
@@ -68,6 +69,7 @@ Feature.Generation <- function(V = 1000000, LoB.dist = c(0.25, 0.30, 0.20, 0.25)
   # Feature generation for LOB 3 and 4
   features_34 <- generate_features_lob(
     features = features,
+    lobs = 3:4,
     Sigma = .lob_34$Covariances$Covariance,
     param_cc = .lob_34$Parameters$cc,
     translator_cc = .lob_34$Translators$cc,
@@ -110,6 +112,7 @@ Feature.Generation <- function(V = 1000000, LoB.dist = c(0.25, 0.30, 0.20, 0.25)
 }
 
 generate_features_lob <- function(features, 
+                                  lobs,
                               # parameters
                               Sigma, param_cc, translator_cc, param_age, param_inj_part,
                               translator_inj_part, 
@@ -120,7 +123,7 @@ generate_features_lob <- function(features,
   # Generate observations from a multivariate normal distribution
   # maybe_set_seed(seed + 3)
   maybe_set_seed(seed)
-  features_new <- MASS::mvrnorm(n = nrow(features[which(features$LoB <= 2), ]), mu = rep(0, 4), Sigma = Sigma)
+  features_new <- MASS::mvrnorm(n = nrow(features[which(features$LoB %in% lobs), ]), mu = rep(0, 4), Sigma = Sigma)
   
   # Transform marginals such that they have a uniform distribution on [0,1]
   features_new <- stats::pnorm(features_new, 0, 1)
