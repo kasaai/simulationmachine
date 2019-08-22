@@ -78,10 +78,10 @@ Feature.Generation <- function(V = 1000000, LoB.dist = c(0.25, 0.30, 0.20, 0.25)
     f.age1 = f.age1_34,
     f.age2 = f.age2_34,
     f.inj_part = f.inj_part_34,
-    seed = seed + 3
+    seed = seed + 4
   )
   
-  features[which(features$LoB <= 2), c(3, 5, 6, 7)] <- features_34
+  features[which(features$LoB > 2), c(3, 5, 6, 7)] <- features_34
 
   # Order the data: first random order then order according to the accident year AY
   maybe_set_seed(seed + 5)
@@ -119,6 +119,7 @@ generate_features_lob <- function(features,
   
   # Generate observations from a multivariate normal distribution
   # maybe_set_seed(seed + 3)
+  maybe_set_seed(seed)
   features_new <- MASS::mvrnorm(n = nrow(features[which(features$LoB <= 2), ]), mu = rep(0, 4), Sigma = Sigma)
   
   # Transform marginals such that they have a uniform distribution on [0,1]

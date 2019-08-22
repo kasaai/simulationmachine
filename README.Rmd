@@ -40,7 +40,7 @@ First, we can specify the parameters of a simulation using `simulation_machine()
 library(simulationmachine)
 
 incantation <- simulation_machine(
-  num_records = 500000, 
+  num_records = 50000, 
   lob_distribution = c(0.25, 0.25, 0.25, 0.25), 
   inflation = c(0.01, 0.01, 0.01, 0.01), 
   sd_claim = 0.85, 
