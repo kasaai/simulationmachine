@@ -31,6 +31,7 @@ Imports:
     MASS,
     dplyr,
     tidyr,
-    magrittr
+    magrittr,
+    foreach
 Remotes: 
     kasaai/conjuror
