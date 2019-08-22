@@ -4,11 +4,11 @@
 \alias{simulation_machine}
 \title{Create a Simulation Machine Specification}
 \usage{
-simulation_machine(num_records, lob_distribution, inflation, sd_claim,
+simulation_machine(num_claims, lob_distribution, inflation, sd_claim,
   sd_recovery)
 }
 \arguments{
-\item{num_records}{Number of expected records to generate.}
+\item{num_claims}{Number of expected records to generate.}
 
 \item{lob_distribution}{A length 4 vector. Distribution of claims among the 
 four LOBs.}

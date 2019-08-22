@@ -29,7 +29,9 @@ Imports:
     conjuror (>= 0.0.0.9000),
     glue,
     MASS,
-    foreach,
-    doParallel
+    dplyr,
+    tidyr,
+    magrittr,
+    foreach
 Remotes: 
     kasaai/conjuror
