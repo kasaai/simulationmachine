@@ -11,8 +11,6 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 status](https://travis-ci.org/kasaai/simulationmachine.svg?branch=master)](https://travis-ci.org/kasaai/simulationmachine)
 <!-- badges: end -->
 
-**NOTE: In early stages of development – do not use yet\!**
-
 This package implements the claims history simulation algorithm detailed
 in [*An Individual Claims History Simulation
 Machine*](https://www.mdpi.com/2227-9091/6/2/29) by Andrea Gabrielli and
@@ -25,9 +23,9 @@ You can install the development version from
 [GitHub](https://github.com/) with:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("kasaai/conjuror")
-devtools::install_github("kasaai/simulationmachine")
+# install.packages("remotes")
+remotes::install_github("kasaai/conjuror")
+remotes::install_github("kasaai/simulationmachine")
 ```
 
 ## Example
