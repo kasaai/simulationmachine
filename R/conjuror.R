@@ -1,6 +1,6 @@
 #' Create a Simulation Machine Specification
 #' 
-#' @param num_records Number of expected records to generate.
+#' @param num_claims Number of expected records to generate.
 #' @param lob_distribution A length 4 vector. Distribution of claims among the 
 #'   four LOBs.
 #' @param inflation A length 4 vector. Grow parameters (per LOB) for the numbers
@@ -11,12 +11,12 @@
 #'   distribution of the recovery sizes.
 #' @return An incantation object.
 #' @export
-simulation_machine <- function(num_records,
+simulation_machine <- function(num_claims,
                                lob_distribution,
                                inflation, sd_claim, sd_recovery) {
   conjuror::scribe(
     simulator = "simulation_machine",
-    num_records = num_records,
+    num_claims = num_claims,
     lob_distribution = lob_distribution,
     inflation = inflation,
     sd_claim = sd_claim,
@@ -39,7 +39,7 @@ conjuror::conjure
 conjure.simulation_machine <- function(incantation, seed = NULL, 
                                        rows_per_partition = NULL, ...) {
   features <- Feature.Generation(
-    V = incantation[["num_records"]],
+    V = incantation[["num_claims"]],
     LoB.dist = incantation[["lob_distribution"]],
     inflation = incantation[["inflation"]],
     seed = seed
@@ -57,12 +57,12 @@ conjure.simulation_machine <- function(incantation, seed = NULL,
     std2 = incantation[["sd_recovery"]]
   )
   
-  records
+  tidy_records(records)
 }
 
 #' @export
 print.simulation_machine <- function(x, ...) {
-  num_records <- x[["num_records"]]
+  num_claims <- x[["num_claims"]]
   lob_distribution <- x[["lob_distribution"]]
   inflation <- x[["inflation"]]
   sd_claim <- x[["sd_claim"]]
@@ -71,8 +71,12 @@ print.simulation_machine <- function(x, ...) {
   print(glue::glue("
 A simulation incantation for `simulation_machine`
 
+Each record is:
+ - A snapshot of a claim's incremental paid loss and claim status
+   at a development year.
+
 Specs:
- - Expected number of claims: {format(num_records, big.mark = ',', scientific = FALSE)}
+ - Expected number of claims: {format(num_claims, big.mark = ',', scientific = FALSE)}
  - LOB distribution: {paste0(lob_distribution, collapse = ', ')}
  - Inflation: {paste0(inflation, collapse = ', ')}
  - SD of claim sizes: {sd_claim},
