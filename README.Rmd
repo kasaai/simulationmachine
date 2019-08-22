@@ -41,7 +41,7 @@ library(simulationmachine)
 
 incantation <- simulation_machine(
   num_records = 50000, 
-  lob_distribution = c(0.25, 0.25, 0.25, 0.25), 
+  lob_distribution = c(0.25, 0.25, 0.30, 0.20), 
   inflation = c(0.01, 0.01, 0.01, 0.01), 
   sd_claim = 0.85, 
   sd_recovery = 0.85
@@ -53,6 +53,6 @@ incantation
 Once we have the incantation object, we can use `conjure()` to perform the simulation.
 
 ```{r}
-records <- conjure(incantation, seed = 100)
+records <- conjure(incantation, seed = )
 dplyr::glimpse(records)
 ```
