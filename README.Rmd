@@ -53,6 +53,6 @@ incantation
 Once we have the incantation object, we can use `conjure()` to perform the simulation.
 
 ```{r}
-records <- conjure(incantation, seed = )
+records <- conjure(incantation, seed = 100)
 dplyr::glimpse(records)
 ```
