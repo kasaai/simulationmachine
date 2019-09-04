@@ -1,4 +1,9 @@
 test_that("Generated claim counts agrees with original version", {
+  
+  # Skip on travis/CRAN since the dataset exceeds RAM limits
+  skip_on_travis()
+  skip_on_cran()
+  
   library(dplyr)
   spec1 <- simulation_machine(
     num_claims = 1000000,
