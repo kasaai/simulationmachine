@@ -36,4 +36,4 @@ Imports:
 Remotes: 
     kasaai/conjuror
 Suggests: 
-    testthat
+    testthat (>= 2.1.0)
