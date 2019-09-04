@@ -35,3 +35,5 @@ Imports:
     foreach
 Remotes: 
     kasaai/conjuror
+Suggests: 
+    testthat (>= 2.1.0)
