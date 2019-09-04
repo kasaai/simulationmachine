@@ -8,6 +8,7 @@ maybe_set_seed <- function(seed) {
     set.seed(NULL)
 }
 
+#' @importFrom dplyr .data
 tidy_records <- function(records) {
   records %>% 
     dplyr::as_tibble() %>% 
@@ -22,7 +23,7 @@ tidy_records <- function(records) {
       injured_part = .data$inj_part,
       report_delay = .data$RepDel
     ) %>% 
-    tidyr::gather("key", "value", Pay00:Open11) %>%
+    tidyr::gather("key", "value", "Pay00":"Open11") %>%
     dplyr::arrange(.data$claim_id) %>% 
     tidyr::separate("key", into = c("variable", "development_year"), sep = "(?<=[a-z])(?=[0-9])") %>% 
     tidyr::spread("variable", "value") %>% 
