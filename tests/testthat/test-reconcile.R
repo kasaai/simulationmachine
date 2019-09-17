@@ -1,12 +1,8 @@
 test_that("Generated claim counts agrees with original version", {
-  
-  # Skip on travis/CRAN since the dataset exceeds RAM limits
-  skip_on_travis()
-  skip_on_cran()
-  
+
   library(dplyr)
   spec1 <- simulation_machine(
-    num_claims = 1000000,
+    num_claims = 100000,
     lob_distribution = c(0.25, 0.25, 0.25, 0.25),
     inflation = c(0.01, 0.01, 0.01, 0.01),
     sd_claim = 0.85,
@@ -15,32 +11,7 @@ test_that("Generated claim counts agrees with original version", {
   
   data1 <- conjure(spec1, seed = 75)
   
-  spec2 <- simulation_machine(
-    num_claims = 200000,
-    lob_distribution = c(0.50,0,0,0.50),
-    inflation = c(0.05,0,0,0.05),
-    sd_claim = 0.85,
-    sd_recovery = 0.85
-  )
-  
-  data2 <- conjure(spec2, seed = 75)
-  
-  combined_data <- bind_rows(
-    data1 %>% 
-      mutate(lob = ifelse(lob == "3", "5", lob)),
-    data2 %>% 
-      mutate(
-        lob = case_when(
-          lob == "1" ~ "3",
-          lob == "4" ~ "6"
-        ),
-        claim_id = as.character(
-          as.numeric(claim_id) + nrow(distinct(data1, claim_id))
-        )
-      )
-  )
-  
-  claim_counts_by_ay <- combined_data %>% 
+  claim_counts_by_ay <- data1 %>% 
     distinct(claim_id, accident_year) %>% 
     group_by(accident_year) %>% 
     count() %>% 
@@ -48,21 +19,21 @@ test_that("Generated claim counts agrees with original version", {
   
   expect_identical(
     claim_counts_by_ay,
-    c(92620L, 
-      94910L,
-      95484L,
-      95916L,
-      97331L,
-      96928L,
-      99134L,
-      102837L,
-      103698L,
-      105712L,
-      106748L,
-      107570L)
+    c(7790L, 
+      8120L,
+      8104L,
+      8180L,
+      8248L,
+      8199L,
+      8312L,
+      8545L,
+      8505L,
+      8641L,
+      8516L,
+      8775L)
   )
   
-  claim_counts_by_lob <- combined_data %>% 
+  claim_counts_by_lob <- data1 %>% 
     distinct(claim_id, lob) %>% 
     group_by(lob) %>% 
     count() %>% 
@@ -70,11 +41,14 @@ test_that("Generated claim counts agrees with original version", {
   
   expect_identical(
     claim_counts_by_lob,
-    c(250040L,
-      250197L,
-      99969L,
-      249683L,
-      249298L,
-      99701L)
+    c(25056L,
+      25195L,
+      24678L,
+      25006L)
+  )
+  
+  expect_identical(
+    sum(data1$paid_loss),
+    194791278
   )
 })
