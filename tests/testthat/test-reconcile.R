@@ -52,3 +52,39 @@ test_that("Generated claim counts agrees with original version", {
     194791278
   )
 })
+
+test_that("`seed_features` is respected", {
+  
+  library(dplyr)
+  spec1 <- simulation_machine(
+    num_claims = 100000,
+    lob_distribution = c(0.25, 0.25, 0.25, 0.25),
+    inflation = c(0.01, 0.01, 0.01, 0.01),
+    sd_claim = 0.85,
+    sd_recovery = 0.85
+  )
+  
+  data1 <- conjure(spec1, seed = 75, seed_features = 42)
+  
+  claim_counts_by_ay <- data1 %>% 
+    distinct(claim_id, accident_year) %>% 
+    group_by(accident_year) %>% 
+    count() %>% 
+    pull(n)
+  
+  expect_identical(
+    claim_counts_by_ay,
+    c(7810L, 
+      8161L,
+      7934L,
+      8031L,
+      8078L,
+      8283L,
+      8313L,
+      8445L,
+      8557L,
+      8649L,
+      8610L,
+      8952L)
+  )
+})

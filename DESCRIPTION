@@ -13,7 +13,7 @@ Authors@R:
            email = "mario.wuethrich@math.ethz.ch"),
       person(given = "Kevin",
            family = "Kuo",
-           role = c("ctb", "cre"),
+           role = c("aut", "cre"),
            email = "kevin@kasa.ai",
            comment = c(ORCID = "0000-0001-7803-7901"))
     )
@@ -24,6 +24,7 @@ License: Apache License (>= 2.0)
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
+Roxygen: list(markdown = TRUE)
 Depends: R (>= 2.10)
 Imports: 
     conjuror (>= 0.0.0.9000),
