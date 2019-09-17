@@ -10,16 +10,16 @@ simulation_machine(num_claims, lob_distribution, inflation, sd_claim,
 \arguments{
 \item{num_claims}{Number of expected records to generate.}
 
-\item{lob_distribution}{A length 4 vector. Distribution of claims among the 
+\item{lob_distribution}{A length 4 vector. Distribution of claims among the
 four LOBs.}
 
 \item{inflation}{A length 4 vector. Grow parameters (per LOB) for the numbers
 of claims in the 12 accident years.}
 
-\item{sd_claim}{Value of the standard deviation used in the log-normal 
+\item{sd_claim}{Value of the standard deviation used in the log-normal
 distribution of the claim sizes.}
 
-\item{sd_recovery}{Value of the standard deviation used in the log-normal 
+\item{sd_recovery}{Value of the standard deviation used in the log-normal
 distribution of the recovery sizes.}
 }
 \value{
