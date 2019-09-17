@@ -13,7 +13,7 @@ Authors@R:
            email = "mario.wuethrich@math.ethz.ch"),
       person(given = "Kevin",
            family = "Kuo",
-           role = c("ctb", "cre"),
+           role = c("aut", "cre"),
            email = "kevin@kasa.ai",
            comment = c(ORCID = "0000-0001-7803-7901"))
     )
