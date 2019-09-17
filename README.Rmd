@@ -63,3 +63,16 @@ records %>%
   distinct(claim_id) %>% 
   count()
 ```
+
+If you prefer to have each row of the dataset to correspond to a claim, you can simply pivot the data with tidyr:
+
+```{r}
+records_wide <- records %>% 
+  tidyr::pivot_wider(
+    names_from = development_year, 
+    values_from = c(paid_loss, claim_status_open),
+    values_fill = list(paid_loss = 0)
+  )
+
+glimpse(records_wide)
+````
