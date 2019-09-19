@@ -9,7 +9,7 @@
 #'   distribution of the claim sizes.
 #' @param sd_recovery  Value of the standard deviation used in the log-normal 
 #'   distribution of the recovery sizes.
-#' @return An incantation object.
+#' @return A `charm` object.
 #' @export
 simulation_machine <- function(num_claims,
                                lob_distribution,
@@ -30,7 +30,7 @@ conjuror::conjure
 
 #' Simulate Claim Histories
 #' 
-#' @param incantation An `incantation` object returned by `simulation_machine()`.
+#' @param charm An `charm` object returned by `simulation_machine()`.
 #' @param ... Optional additional arguments, currently unused.
 #' @param seed Seed for random number generation.
 #' @param seed_features (Optional) For backwards compatibility; see Details.
@@ -45,13 +45,13 @@ conjuror::conjure
 #'   equal to the `seed` argument by default.
 #'   
 #' @export
-conjure.simulation_machine <- function(incantation, seed = NULL, 
+conjure.simulation_machine <- function(char, seed = NULL, 
                                        seed_features = seed,
                                        rows_per_partition = NULL, ...) {
   features <- Feature.Generation(
-    V = incantation[["num_claims"]],
-    LoB.dist = incantation[["lob_distribution"]],
-    inflation = incantation[["inflation"]],
+    V = charm[["num_claims"]],
+    LoB.dist = charm[["lob_distribution"]],
+    inflation = charm[["inflation"]],
     seed = seed_features
   )
   
@@ -63,8 +63,8 @@ conjure.simulation_machine <- function(incantation, seed = NULL,
     features,
     npb = rows_per_partition,
     seed1 = seed,
-    std1 = incantation[["sd_claim"]],
-    std2 = incantation[["sd_recovery"]]
+    std1 = charm[["sd_claim"]],
+    std2 = charm[["sd_recovery"]]
   )
   
   tidy_records(records)
@@ -79,7 +79,7 @@ print.simulation_machine <- function(x, ...) {
   sd_recovery <- x[["sd_recovery"]]
   
   print(glue::glue("
-A simulation incantation for `simulation_machine`
+A simulation charm for `simulation_machine`
 
 Each record is:
  - A snapshot of a claim's incremental paid loss and claim status

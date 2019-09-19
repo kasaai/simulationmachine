@@ -36,7 +36,7 @@ First, we can specify the parameters of a simulation using
 ``` r
 library(simulationmachine)
 
-incantation <- simulation_machine(
+charm <- simulation_machine(
   num_claims = 50000, 
   lob_distribution = c(0.25, 0.25, 0.30, 0.20), 
   inflation = c(0.01, 0.01, 0.01, 0.01), 
@@ -44,8 +44,8 @@ incantation <- simulation_machine(
   sd_recovery = 0.85
 )
 
-incantation
-#> A simulation incantation for `simulation_machine`
+charm
+#> A simulation charm for `simulation_machine`
 #> 
 #> Each record is:
 #>  - A snapshot of a claim's incremental paid loss and claim status
@@ -59,12 +59,12 @@ incantation
 #>  - SD of recovery sizes: 0.85
 ```
 
-Once we have the incantation object, we can use `conjure()` to perform
-the simulation.
+Once we have the charm object, we can use `conjure()` to perform the
+simulation.
 
 ``` r
 library(dplyr)
-records <- conjure(incantation, seed = 100)
+records <- conjure(charm, seed = 100)
 glimpse(records)
 #> Observations: 603,324
 #> Variables: 11

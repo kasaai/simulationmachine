@@ -4,12 +4,10 @@
 \alias{conjure.simulation_machine}
 \title{Simulate Claim Histories}
 \usage{
-\method{conjure}{simulation_machine}(incantation, seed = NULL,
+\method{conjure}{simulation_machine}(char, seed = NULL,
   seed_features = seed, rows_per_partition = NULL, ...)
 }
 \arguments{
-\item{incantation}{An \code{incantation} object returned by \code{simulation_machine()}.}
-
 \item{seed}{Seed for random number generation.}
 
 \item{seed_features}{(Optional) For backwards compatibility; see Details.}
@@ -18,6 +16,8 @@
 observations that are treated at the same time.}
 
 \item{...}{Optional additional arguments, currently unused.}
+
+\item{charm}{An \code{charm} object returned by \code{simulation_machine()}.}
 }
 \description{
 Simulate Claim Histories
