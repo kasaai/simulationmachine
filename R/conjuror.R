@@ -45,7 +45,7 @@ conjuror::conjure
 #'   equal to the `seed` argument by default.
 #'   
 #' @export
-conjure.simulation_machine <- function(char, seed = NULL, 
+conjure.simulation_machine <- function(charm, seed = NULL, 
                                        seed_features = seed,
                                        rows_per_partition = NULL, ...) {
   features <- Feature.Generation(
