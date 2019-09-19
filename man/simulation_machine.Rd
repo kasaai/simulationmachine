@@ -23,7 +23,7 @@ distribution of the claim sizes.}
 distribution of the recovery sizes.}
 }
 \value{
-An incantation object.
+A \code{charm} object.
 }
 \description{
 Create a Simulation Machine Specification

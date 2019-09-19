@@ -1,6 +1,6 @@
 Package: simulationmachine
 Title: Individual Claims History Simulation Machine 
-Version: 0.0.0.9000
+Version: 0.0.0.9001
 Authors@R: 
     c(
       person(given = "Andrea",
@@ -27,7 +27,7 @@ RoxygenNote: 6.1.1
 Roxygen: list(markdown = TRUE)
 Depends: R (>= 2.10)
 Imports: 
-    conjuror (>= 0.0.0.9000),
+    conjuror (>= 0.0.0.9001),
     glue,
     MASS,
     dplyr,
