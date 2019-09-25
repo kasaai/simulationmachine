@@ -10,10 +10,31 @@
 #' @param sd_recovery  Value of the standard deviation used in the log-normal 
 #'   distribution of the recovery sizes.
 #' @return A `charm` object.
+#' 
+#' @examples
+#' charm <- simulation_machine(
+#'   num_claims = 50000, 
+#'   lob_distribution = c(0.25, 0.25, 0.30, 0.20), 
+#'   inflation = c(0.01, 0.01, 0.01, 0.01), 
+#'   sd_claim = 0.85, 
+#'   sd_recovery = 0.85
+#' )
+#' charm
+#' 
 #' @export
 simulation_machine <- function(num_claims,
                                lob_distribution,
                                inflation, sd_claim, sd_recovery) {
+  num_claims <- forge::cast_scalar_double(num_claims)
+  lob_distribution <- forge::cast_double(lob_distribution, n = 4)
+  if (sum(lob_distribution) != 1) stop(
+    "The elements of `lob_distribution` must sum to 1.",
+    call. = FALSE
+  )
+  inflation <- forge::cast_double(inflation, n = 4)
+  sd_claim <- forge::cast_scalar_double(sd_claim)
+  sd_recovery <- forge::cast_scalar_double(sd_recovery)
+  
   conjuror::scribe(
     simulator = "simulation_machine",
     num_claims = num_claims,
@@ -34,8 +55,8 @@ conjuror::conjure
 #' @param ... Optional additional arguments, currently unused.
 #' @param seed Seed for random number generation.
 #' @param seed_features (Optional) For backwards compatibility; see Details.
-#' @param rows_per_partition (Optional) For parallel processing, number of 
-#'   observations that are treated at the same time.
+#' @param rows_per_partition (Optional, currently unused) For parallel processing, 
+#' number of observations that are treated at the same time.
 #'   
 #' @details In the original Simulation Machine paper, a second "seed" parameter
 #'   is available to be set that controls the randomness of the feature generation
@@ -44,6 +65,17 @@ conjuror::conjure
 #'   code. However, for most usage this parameter can be ignored, and is set
 #'   equal to the `seed` argument by default.
 #'   
+#' @examples
+#' charm <- simulation_machine(
+#'   num_claims = 5000, 
+#'   lob_distribution = c(0.25, 0.25, 0.30, 0.20), 
+#'   inflation = c(0.01, 0.01, 0.01, 0.01), 
+#'   sd_claim = 0.85, 
+#'   sd_recovery = 0.85
+#' )
+#'
+#' conjure(charm, seed = 100)
+#' 
 #' @export
 conjure.simulation_machine <- function(charm, seed = NULL, 
                                        seed_features = seed,

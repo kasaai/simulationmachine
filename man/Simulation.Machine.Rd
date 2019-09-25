@@ -21,3 +21,4 @@ Simulation.Machine(features, npb = nrow(features), seed1 = 100,
 \description{
 Simulate Claims
 }
+\keyword{internal}

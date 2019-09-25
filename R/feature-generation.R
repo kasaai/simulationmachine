@@ -4,6 +4,7 @@
 #' @param LoB.dist Categorical distribution for the allocation of the claims to the four lines of business.
 #' @param inflation Grow parameters (per LOB) for the numbers of claims in the 12 accident years.
 #' @param seed Random seed.
+#' @keywords internal
 Feature.Generation <- function(V = 1000000, LoB.dist = c(0.25, 0.30, 0.20, 0.25),
                                inflation = c(0.01, 0.01, 0.01, 0.01), seed = 100) {
   
