@@ -14,6 +14,16 @@
 simulation_machine <- function(num_claims,
                                lob_distribution,
                                inflation, sd_claim, sd_recovery) {
+  num_claims <- forge::cast_scalar_double(num_claims)
+  lob_distribution <- forge::cast_double(lob_distribution, n = 4)
+  if (sum(lob_distribution) != 1) stop(
+    "The elements of `lob_distribution` must sum to 1.",
+    call. = FALSE
+  )
+  inflation <- forge::cast_double(inflation, n = 4)
+  sd_claim <- forge::cast_scalar_double(sd_claim)
+  sd_recovery <- forge::cast_scalar_double(sd_recovery)
+  
   conjuror::scribe(
     simulator = "simulation_machine",
     num_claims = num_claims,
