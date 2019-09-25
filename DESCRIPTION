@@ -33,7 +33,8 @@ Imports:
     dplyr,
     tidyr,
     magrittr,
-    foreach
+    foreach,
+    forge
 Remotes: 
     kasaai/conjuror
 Suggests: 
