@@ -24,7 +24,6 @@ You can install the development version from
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("kasaai/conjuror")
 remotes::install_github("kasaai/simulationmachine")
 ```
 
@@ -140,3 +139,9 @@ glimpse(records_wide)
 #> $ claim_status_open_10 <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
 #> $ claim_status_open_11 <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
 ```
+
+-----
+
+Please note that this project is released with a [Contributor Code of
+Conduct](https://github.com/kasaai/quests/blob/master/CODE_OF_CONDUCT.md).
+By participating in this project you agree to abide by its terms.
