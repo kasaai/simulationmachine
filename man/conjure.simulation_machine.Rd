@@ -14,8 +14,8 @@
 
 \item{seed_features}{(Optional) For backwards compatibility; see Details.}
 
-\item{rows_per_partition}{(Optional) For parallel processing, number of
-observations that are treated at the same time.}
+\item{rows_per_partition}{(Optional, currently unused) For parallel processing,
+number of observations that are treated at the same time.}
 
 \item{...}{Optional additional arguments, currently unused.}
 }

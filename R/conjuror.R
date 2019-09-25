@@ -44,8 +44,8 @@ conjuror::conjure
 #' @param ... Optional additional arguments, currently unused.
 #' @param seed Seed for random number generation.
 #' @param seed_features (Optional) For backwards compatibility; see Details.
-#' @param rows_per_partition (Optional) For parallel processing, number of 
-#'   observations that are treated at the same time.
+#' @param rows_per_partition (Optional, currently unused) For parallel processing, 
+#' number of observations that are treated at the same time.
 #'   
 #' @details In the original Simulation Machine paper, a second "seed" parameter
 #'   is available to be set that controls the randomness of the feature generation
