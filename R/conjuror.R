@@ -10,6 +10,17 @@
 #' @param sd_recovery  Value of the standard deviation used in the log-normal 
 #'   distribution of the recovery sizes.
 #' @return A `charm` object.
+#' 
+#' @examples
+#' charm <- simulation_machine(
+#'   num_claims = 50000, 
+#'   lob_distribution = c(0.25, 0.25, 0.30, 0.20), 
+#'   inflation = c(0.01, 0.01, 0.01, 0.01), 
+#'   sd_claim = 0.85, 
+#'   sd_recovery = 0.85
+#' )
+#' charm
+#' 
 #' @export
 simulation_machine <- function(num_claims,
                                lob_distribution,
@@ -54,6 +65,17 @@ conjuror::conjure
 #'   code. However, for most usage this parameter can be ignored, and is set
 #'   equal to the `seed` argument by default.
 #'   
+#' @examples
+#' charm <- simulation_machine(
+#'   num_claims = 5000, 
+#'   lob_distribution = c(0.25, 0.25, 0.30, 0.20), 
+#'   inflation = c(0.01, 0.01, 0.01, 0.01), 
+#'   sd_claim = 0.85, 
+#'   sd_recovery = 0.85
+#' )
+#'
+#' conjure(charm, seed = 100)
+#' 
 #' @export
 conjure.simulation_machine <- function(charm, seed = NULL, 
                                        seed_features = seed,

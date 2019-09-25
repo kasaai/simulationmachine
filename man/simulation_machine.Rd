@@ -28,3 +28,14 @@ A \code{charm} object.
 \description{
 Create a Simulation Machine Specification
 }
+\examples{
+charm <- simulation_machine(
+  num_claims = 50000, 
+  lob_distribution = c(0.25, 0.25, 0.30, 0.20), 
+  inflation = c(0.01, 0.01, 0.01, 0.01), 
+  sd_claim = 0.85, 
+  sd_recovery = 0.85
+)
+charm
+
+}
